@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home"
+    tools:context=".MainActivity">
+    <!--region Guide lines-->
+    <!--region Vertical Guide lines-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraint_guideline_vertical_leading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraint_guideline_vertical_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraint_guideline_vertical_trailing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+    <!--endregion-->
+    <!--region Horizontal Guidlines-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraint_guideline_horizontal_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraint_guideline_horizontal_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraint_guideline_horizontal_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+    <!--endregion-->
+    <!--endregion-->
+    <ImageView
+        android:id="@+id/resultImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/constraint_guideline_horizontal_center"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/constraint_guideline_vertical_trailing"
+        app:layout_constraintStart_toStartOf="@id/constraint_guideline_vertical_leading"
+        app:layout_constraintTop_toTopOf="@id/constraint_guideline_horizontal_top"
+        app:srcCompat="@drawable/sample" />
+
+    <!--    <Button-->
+    <!--        android:id="@+id/uploadButton"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:backgroundTint="#F44336"-->
+    <!--        android:text="@string/select"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/resultImage"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/constraint_guideline_vertical_leading"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/predictButton"/>-->
+
+
+    <!--    <Button-->
+    <!--        android:id="@+id/scanButton"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:backgroundTint="@color/light_green"-->
+    <!--        android:text="@string/predict"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/resultImage"-->
+    <!--        app:layout_constraintVertical_bias="0.498" />-->
+
+    <TextView
+        android:id="@+id/textViewPrediction"
+        android:layout_width="367dp"
+        android:layout_height="83dp"
+        android:text="Select image and press scan button"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraint_guideline_horizontal_center"
+        app:layout_constraintVertical_bias="0.315" />
+
+    <ImageButton
+        android:id="@+id/uploadButton"
+        android:layout_width="97dp"
+        android:layout_height="73dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/constraint_guideline_horizontal_bottom"
+        app:layout_constraintEnd_toEndOf="@id/constraint_guideline_vertical_center"
+        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintStart_toStartOf="@id/constraint_guideline_vertical_leading"
+        app:layout_constraintTop_toBottomOf="@id/textViewPrediction"
+        app:layout_constraintVertical_bias="0.514"
+        app:srcCompat="@drawable/upload_photo" />
+
+    <ImageButton
+        android:id="@+id/captureButton"
+        android:layout_width="94dp"
+        android:layout_height="74dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/constraint_guideline_horizontal_bottom"
+        app:layout_constraintEnd_toEndOf="@id/constraint_guideline_vertical_trailing"
+        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintStart_toStartOf="@id/constraint_guideline_vertical_center"
+        app:layout_constraintTop_toBottomOf="@id/textViewPrediction"
+        app:layout_constraintVertical_bias="0.509"
+        app:srcCompat="@drawable/take_photo" />
+
+    <ImageButton
+        android:id="@+id/scanButton"
+        android:layout_width="78dp"
+        android:layout_height="68dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPrediction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraint_guideline_horizontal_center"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/scanicon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

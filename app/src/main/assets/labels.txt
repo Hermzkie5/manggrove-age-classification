@@ -1,0 +1,3 @@
+0 propagule
+1 saplings
+2 tree
