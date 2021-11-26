@@ -91,6 +91,7 @@
         app:srcCompat="@drawable/r_sample" />
 
     <ImageView
+        android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="fitXY"
@@ -116,11 +117,12 @@
         app:layout_constraintVertical_bias="0.514"
         app:srcCompat="@drawable/r_backbutton" />
 
+
     <ImageButton
         android:id="@+id/saveButton"
         android:layout_width="70dp"
         android:layout_height="70dp"
-
+        android:layout_marginBottom="72dp"
         android:background="@null"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@id/constraint_guideline_horizontal_bottom"
@@ -129,5 +131,18 @@
         app:layout_constraintStart_toStartOf="@id/constraint_guideline_vertical_center"
         app:srcCompat="@drawable/r_save" />
 
+    <TextView
+        android:id="@+id/textViewPrediction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottom_sheet"
+        app:layout_constraintVertical_bias="0.315"
+        tools:text="Result" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

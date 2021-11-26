@@ -81,29 +81,31 @@
         android:id="@+id/uploadButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_marginBottom="135dp"
         android:background="@null"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@id/constraint_guideline_horizontal_bottom"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/constraint_guideline_vertical_center"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@id/constraint_guideline_vertical_leading"
-        app:srcCompat="@drawable/hp_upload_photo" />
+        app:srcCompat="@drawable/hp_upload_photo"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/captureButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_marginBottom="135dp"
         android:background="@null"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@id/constraint_guideline_horizontal_bottom"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/constraint_guideline_vertical_trailing"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@id/constraint_guideline_vertical_center"
-        app:srcCompat="@drawable/hp_take_photo" />
+        app:srcCompat="@drawable/hp_take_photo"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/exploreButton"
@@ -117,5 +119,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.387"
-        app:srcCompat="@drawable/hp_explore" />
+        app:srcCompat="@drawable/hp_explore"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

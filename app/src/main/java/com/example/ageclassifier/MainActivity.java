@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ageclassifier.ml.Model;
 
@@ -35,29 +36,26 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
     public static Intent newIntent(Context context) { Log.d(TAG,"newIntent()");
         return new Intent(context.getApplicationContext(), MainActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
+
     private static final int PERMISSION_STATE = 0;
     private static final int CAMERA_REQUEST = 1;
     private static final int GALLERY_REQUEST = 2;
     private ImageButton imgCamera;
-    private ImageView imgResult;
     private ImageButton btnSelect;
-    private ImageButton btnPredict;
-    private TextView txtPrediction;
-    private Bitmap bitmap;
+    public static Bitmap bitmap;
+    private String result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { Log.d(TAG,"onCreate()");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home_page);
         imgCamera = (ImageButton) findViewById(R.id.captureButton);
-        imgResult = (ImageView) findViewById(R.id.resultImage);
-        txtPrediction = (TextView) findViewById(R.id.textViewPrediction);
         btnSelect = (ImageButton) findViewById(R.id.uploadButton);
-        btnPredict = (ImageButton) findViewById(R.id.scanButton);
     }
 
     @Override
@@ -81,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() { Log.d(TAG,"onResume()");
         super.onResume();
         btnSelect.setOnClickListener(this::onClick);
-        btnPredict.setOnClickListener(this::onClick);
+        //btnPredict.setOnClickListener(this::onClick);
         imgCamera.setOnClickListener(this::onClick);
         checkPermissions();
     }
@@ -90,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onPause() { Log.d(TAG,"onPause()");
         super.onPause();
         btnSelect.setOnClickListener(null);
-        btnPredict.setOnClickListener(null);
+        //btnPredict.setOnClickListener(null);
         imgCamera.setOnClickListener(null);
     }
 
@@ -102,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_REQUEST); //startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI) , GALLERY_REQUEST);
+    }
+
+    private void launchScanning() { Log.d(TAG,"launchScanning()");
+        startActivity(ScanningPage.newIntent(this, result));
     }
 
     private void predict() { Log.d(TAG,"predict()");
@@ -120,8 +122,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
             // Releases model resources if no longer used.
             model.close();
-            txtPrediction.setText(getMax(outputFeature0.getFloatArray()));//txtPrediction.setText(outputFeature0.getFloatArray()[0] + "\n" + outputFeature0.getFloatArray()[1] + "\n" + outputFeature0.getFloatArray()[2]);
-            getMax(outputFeature0.getFloatArray());
+            //txtPrediction.setText(getMax(outputFeature0.getFloatArray()));//txtPrediction.setText(outputFeature0.getFloatArray()[0] + "\n" + outputFeature0.getFloatArray()[1] + "\n" + outputFeature0.getFloatArray()[2]);
+            result = getMax(outputFeature0.getFloatArray());
             Log.d("Result",Arrays.toString(outputFeature0.getFloatArray()));
         } catch (IOException e) {
             Log.e(TAG,"IOException " + e.getMessage());
@@ -130,12 +132,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private String getMax(float [] outputs) { Log.d(TAG,"getMax( " + Arrays.toString(outputs) + ")");
         if (outputs.length != 0 & outputs[0] > outputs[1] & outputs[0] > outputs[2]) {
+            Log.d(TAG,"getMax( " + Arrays.toString(outputs) + ") : Propagule");
             return "Propagule";
         } else if (outputs.length != 0 & outputs[1] > outputs[0] & outputs[1] > outputs[2]) {
+            Log.d(TAG,"getMax( " + Arrays.toString(outputs) + ") : Sapling");
             return "Sapling";
         } else if (outputs.length != 0 & outputs[2] > outputs[0] & outputs[2] > outputs[1]) {
+            Log.d(TAG,"getMax( " + Arrays.toString(outputs) + ") : Tree");
             return "Tree";
         } else {
+            Log.d(TAG,"getMax( " + Arrays.toString(outputs) + ") : ");
             return "";
         }
     }
@@ -214,16 +220,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult requestCode " + requestCode + " resultCode" + resultCode + "data " + data);
         if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && data != null) {
-            imgResult.setImageURI(data.getData());
+            //imgResult.setImageURI(data.getData());
             Uri uri = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            predict();
+            launchScanning();
         } else if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK && data != null) {
-            bitmap = (Bitmap) data.getExtras().get("data");
-            imgResult.setImageBitmap(bitmap);
+            try {
+                bitmap = (Bitmap) data.getExtras().get("data");
+                //imgResult.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            predict();
+            launchScanning();
         }
     }
 }
