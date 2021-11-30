@@ -17,11 +17,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ageclassifier.ml.Model;
 
@@ -47,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int GALLERY_REQUEST = 2;
     private ImageButton imgCamera;
     private ImageButton btnSelect;
+    private ImageButton exploreButton;
     public static Bitmap bitmap;
     private String result;
 
@@ -56,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home_page);
         imgCamera = (ImageButton) findViewById(R.id.captureButton);
         btnSelect = (ImageButton) findViewById(R.id.uploadButton);
+        exploreButton = (ImageButton)  findViewById( R.id.exploreButton );
     }
 
     @Override
@@ -70,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.captureButton:
                 launchCamera();
                 break;
+            case R.id.exploreButton:
+                ExplorePage();
+                break;
             default:
                 break;
         }
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSelect.setOnClickListener(this::onClick);
         //btnPredict.setOnClickListener(this::onClick);
         imgCamera.setOnClickListener(this::onClick);
+        exploreButton.setOnClickListener(this::onClick);
         checkPermissions();
     }
 
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSelect.setOnClickListener(null);
         //btnPredict.setOnClickListener(null);
         imgCamera.setOnClickListener(null);
+        exploreButton.setOnClickListener(null);
     }
 
     private void launchCamera() { Log.d(TAG,"launchCamera()");
@@ -157,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             manifestPermissions = new String[] {
                     Manifest.permission.CAMERA,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
             };
         }
@@ -239,5 +243,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             predict();
             launchScanning();
         }
+    }
+    private void ExplorePage() {
+        Intent intent = new Intent(this,ExplorePage.class);
+        startActivity( intent );
     }
 }

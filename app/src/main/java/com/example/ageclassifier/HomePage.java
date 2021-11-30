@@ -9,23 +9,21 @@ import android.widget.ImageButton;
 
 public class HomePage extends AppCompatActivity {
     private ImageButton exploreButton;
-    private ImageButton uploadButton;
-    private ImageButton captureButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
         exploreButton = (ImageButton) findViewById(R.id.exploreButton);
         exploreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openExplorePage();
+
+                ExplorePage();
             }
         });
     }
-    public void openExplorePage() {
+    public void ExplorePage() {
         Intent intent = new Intent(this, ExplorePage.class);
         startActivity(intent);
     }

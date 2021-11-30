@@ -120,9 +120,9 @@
 
     <ImageButton
         android:id="@+id/saveButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="72dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="70dp"
         android:background="@null"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@id/constraint_guideline_horizontal_bottom"
@@ -133,16 +133,17 @@
 
     <TextView
         android:id="@+id/textViewPrediction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:textColor="@color/black"
         android:textSize="30sp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/bottom_sheet"
-        app:layout_constraintVertical_bias="0.315"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="Result" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
